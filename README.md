@@ -8,29 +8,29 @@
 
 ## 快速使用
 
-基础：
-
-```vue
-<v-sign></v-sign>
-```
-
-使用 `v-sign-controls` 按钮子组件
+基础示例，具体说明见下方API：
 
 ```vue
 <template>
-    <v-sign>
-		<v-sign-controls></v-sign-controls>
-	</v-sign>
+	<v-sign @init="onSignInit"></v-sign>
+	<button @click="clear">清空<button>
 </template>
 <script>
-    import vSignControl from '@/components/v-sign/v-sign-control'
     export default {
-        components: {
-			vSignControl
-		}
+        methods: {
+            onSignInit(signCtx) {
+                this.signCtx = signCtx
+            },
+            // 清空
+            clear() {
+                this.signCtx.clear()
+            }
+        }
     }
 </script>
 ```
+
+**若需要使用内置组件，见下方子组件说明。**
 
 ## API
 
@@ -70,7 +70,7 @@
 }
 ```
 
-示例：
+完整示例：
 
 ```html
 <template>
@@ -107,7 +107,7 @@
 
 # 子组件
 
-## 按钮控件（v-controls）
+## 按钮控件（v-sign-controls）
 
 ### API
 
