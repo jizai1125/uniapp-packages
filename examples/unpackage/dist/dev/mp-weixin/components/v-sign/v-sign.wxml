@@ -1,0 +1,1 @@
+<view class="signature-wrap data-v-54259dc4"><canvas style="{{$root.s0}}" canvas-id="{{cid}}" id="{{cid}}" data-event-opts="{{[['touchstart',[['onTouchStart',['$event']]]],['touchmove',[['onTouchMove',['$event']]]],['touchend',[['onTouchEnd',['$event']]]]]}}" bindtouchstart="__e" bindtouchmove="__e" bindtouchend="__e" class="data-v-54259dc4"></canvas><slot></slot></view>

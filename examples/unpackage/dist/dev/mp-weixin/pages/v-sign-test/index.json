@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "uni-app",
+  "usingComponents": {
+    "cus-card": "/components/cus-card/cus-card",
+    "v-sign": "/components/v-sign/v-sign",
+    "v-sign-control": "/components/v-sign/v-sign-control"
+  }
+}
