@@ -131,10 +131,10 @@
 	</v-sign>
 </template>
 <script>
-    import vSignControl from '@/components/v-sign/v-sign-action'
+    import vSignAction from '@/components/v-sign/v-sign-action'
     export default {
         components: {
-			vSignControl
+			vSignAction
 		},
         methods: {
             save(tempFilePath) {
@@ -175,7 +175,7 @@
 ```html
 <template>
     <v-sign>
-		<v-sign-pen></v-sign-action>
+		<v-sign-pen></v-sign-pen>
 	</v-sign>
 </template>
 <script>
