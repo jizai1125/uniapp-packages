@@ -232,5 +232,6 @@ export default {
 
 <style lang="scss" scoped>
 .signature-wrap {
+	position: relative;
 }
 </style>

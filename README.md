@@ -8,9 +8,9 @@
 
 ## 快速使用
 
-基础示例，具体说明见下方API：
+基础示例，具体说明见下方API，**若需要使用内置子组件，见下方子组件说明。**
 
-```vue
+```html
 <template>
 	<v-sign @init="onSignInit"></v-sign>
 	<button @click="clear">清空<button>
@@ -29,8 +29,6 @@
     }
 </script>
 ```
-
-**若需要使用内置组件，见下方子组件说明。**
 
 ## API
 
@@ -51,11 +49,11 @@
 | :------: | :----------------------------------------------------------: | :--------------------------------: |
 |  @init   | 创建完 canvas 实例后触发，向外提供 canvas实例，撤回，清空方法 | Object：具体见下方事件回调参数说明 |
 
-## 事件回调参数说明
+### 事件回调参数说明
 
-### init
+##### init
 
-如果不使用提供 [v-sign-action](#v-sign-action) 子组件操作画布，则可以通过该事件回调暴露的 clear、revoke 等方法。
+可以通过该事件回调暴露的 clear、revoke 等方法。
 
 ```js
 {
@@ -153,14 +151,17 @@
 
 ### 属性 (Props)
 
-|   属性名    |  类型  |      默认值      |            说明            |
-| :---------: | :----: | :--------------: | :------------------------: |
-|    sizes    | Array  | [2, 4, 6, 8, 10] | 画笔尺寸大小数组，单位是px |
-|    color    | String |       #333       |          圆点颜色          |
-| activeColor | String |       #333       |        选中圆点颜色        |
-| customStyle | Object |        -         |       圆点自定义样式       |
-|   bigger    | Number |        2         |      圆点变大变粗倍数      |
-|   minSize   | Number |        4         |   圆点最小大小，单位 px    |
+|   属性名    |  类型   |      默认值      |            说明            |
+| :---------: | :-----: | :--------------: | :------------------------: |
+|    label    | String  |        -         |            标签            |
+|    sizes    |  Array  | [2, 4, 6, 8, 10] | 画笔尺寸大小数组，单位是px |
+|    color    | String  |       #333       |          选项颜色          |
+| activeColor | String  |       #333       |         选中项颜色         |
+|   border    | Boolean |       true       |      选中项是否有边框      |
+|    space    | Number  |      20rpx       |    选项间隙，单位是rpx     |
+| customStyle | Object  |        -         |       选项自定义样式       |
+|   bigger    | Number  |        2         |      圆点变大变粗倍数      |
+|   minSize   | Number  |        4         |   圆点最小尺寸，单位 px    |
 
 ### 事件（Events）
 
@@ -170,6 +171,7 @@
 
 ### 示例
 
+```html
 <template>
     <v-sign>
 		<v-sign-pen></v-sign-action>
@@ -183,3 +185,5 @@
 		}
     }
 </script>
+```
+
