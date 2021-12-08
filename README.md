@@ -151,17 +151,18 @@
 
 ### 属性 (Props)
 
-|   属性名    |  类型   |      默认值      |            说明            |
-| :---------: | :-----: | :--------------: | :------------------------: |
-|    label    | String  |        -         |            标签            |
-|    sizes    |  Array  | [2, 4, 6, 8, 10] | 画笔尺寸大小数组，单位是px |
-|    color    | String  |       #333       |          选项颜色          |
-| activeColor | String  |       #333       |         选中项颜色         |
-|   border    | Boolean |       true       |      选中项是否有边框      |
-|    space    | Number  |      20rpx       |    选项间隙，单位是rpx     |
-| customStyle | Object  |        -         |       选项自定义样式       |
-|   bigger    | Number  |        2         |      圆点变大变粗倍数      |
-|   minSize   | Number  |        4         |   圆点最小尺寸，单位 px    |
+|   属性名    |  类型   |      默认值      |             说明             |
+| :---------: | :-----: | :--------------: | :--------------------------: |
+|    type     | String  |      circle      | 选项样式，可选 circle / line |
+|    label    | String  |        -         |             标签             |
+|    sizes    |  Array  | [2, 4, 6, 8, 10] |  画笔尺寸大小数组，单位是px  |
+|    color    | String  |       #333       |           选项颜色           |
+| activeColor | String  |       #333       |          选中项颜色          |
+|   border    | Boolean |       true       |       选中项是否有边框       |
+|    space    | Number  |      20rpx       |     选项间隙，单位是rpx      |
+| customStyle | Object  |        -         |        选项自定义样式        |
+|   bigger    | Number  |        2         |       圆点变大变粗倍数       |
+|   minSize   | Number  |        4         |    圆点最小尺寸，单位 px     |
 
 ### 事件（Events）
 
