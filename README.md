@@ -55,7 +55,7 @@
 
 ### init
 
-如果不使用提供 [v-sign-controls](#v-sign-controls) 子组件操作画布，则可以通过该事件回调暴露的 clear、revoke 等方法。
+如果不使用提供 [v-sign-action](#v-sign-action) 子组件操作画布，则可以通过该事件回调暴露的 clear、revoke 等方法。
 
 ```js
 {
@@ -107,7 +107,7 @@
 
 # 子组件
 
-## 按钮控件（v-sign-controls）
+## 按钮控件（v-sign-action）
 
 ### API
 
@@ -124,16 +124,16 @@
 
 点击对应类型按钮触发对应事件， 例如点击 清空（clear）按钮则触发 clear 事件
 
-示例：
+### 示例
 
 ```html
 <template>
     <v-sign>
-		<v-sign-controls @save="save"></v-sign-controls>
+		<v-sign-action @save="save"></v-sign-action>
 	</v-sign>
 </template>
 <script>
-    import vSignControl from '@/components/v-sign/v-sign-control'
+    import vSignControl from '@/components/v-sign/v-sign-action'
     export default {
         components: {
 			vSignControl
@@ -147,3 +147,49 @@
 </script>
 ```
 
+## 画笔组件（v-sign-pen）
+
+### API
+
+
+
+ * @property {Array} sizes 画笔大小数组，单位是px
+ * @property {String} color 圆圈颜色
+ * @property {String} activeColor 选中项颜色
+ * @property {Object} customStyle 圆圈自定义样式
+ * @property {Number} bigger 圆圈变大变粗倍数
+ * @property {Number} minSize 圆圈最小大小，单位 px
+ * @event {Function} change 选择画笔大小时触发
+
+### 属性 (Props)
+
+|   属性名    |  类型  |      默认值      |            说明            |
+| :---------: | :----: | :--------------: | :------------------------: |
+|    sizes    | Array  | [2, 4, 6, 8, 10] | 画笔尺寸大小数组，单位是px |
+|    color    | String |       #333       |          圆点颜色          |
+| activeColor | String |       #333       |        选中圆点颜色        |
+| customStyle | Object |        -         |       圆点自定义样式       |
+|   bigger    | Number |        2         |      圆点变大变粗倍数      |
+|   minSize   | Number |        4         |   圆点最小大小，单位 px    |
+
+### 事件（Events）
+
+| 事件称名 |        说明        |       返回值       |
+| :------: | :----------------: | :----------------: |
+| @change  | 选择画笔大小时触发 | size：画笔尺寸大小 |
+
+### 示例
+
+<template>
+    <v-sign>
+		<v-sign-pen></v-sign-action>
+	</v-sign>
+</template>
+<script>
+    import vSignPen from '@/components/v-sign/v-sign-pen'
+    export default {
+        components: {
+			vSignPen
+		}
+    }
+</script>

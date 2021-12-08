@@ -1,5 +1,5 @@
 <template>
-	<view class="v-sign-control" :style="[customStyle]">
+	<view class="v-sign-action" :style="[customStyle]">
 		<view
 			v-for="item in btns"
 			:key="item.label"
@@ -15,7 +15,7 @@
 
 <script>
 /**
- * v-sign-control 控制按钮组（v-sign 子组件）
+ * v-sign-action 控制按钮组（v-sign 子组件）
  * @description 控制 v-sign 组件的一些按钮
  * @tutorial
  * @property {Array} actions 按钮配置 所有值： 清空（clear）, 撤回（prev） 保存图片（save）
@@ -60,8 +60,7 @@ const btnsConf = [
 	}
 ]
 export default {
-	name: 'v-sign-control',
-	inject: ['getInterface'],
+	name: 'v-sign-action',
 	props: {
 		// 按钮配置
 		actions: {
@@ -84,6 +83,7 @@ export default {
 			default: () => ({})
 		}
 	},
+	inject: ['getInterface'],
 	data() {
 		return {
 			formatSize
@@ -126,7 +126,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.v-sign-control {
+.v-sign-action {
 	display: flex;
 	flex-wrap: wrap;
 	.btn {

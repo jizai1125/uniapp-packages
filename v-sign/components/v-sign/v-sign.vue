@@ -21,8 +21,8 @@
  * @property {String, Number} width canvas 宽度
  * @property {String, Number} height canvas 高度
  * @property {Object} customStyle 自定义样式
- * @property {String} lineColor 线颜色
- * @property {Number} lineWidth 线宽度
+ * @property {String} lineColor 画笔颜色
+ * @property {Number} lineWidth 画笔大小，权重大于 v-sign-pen 组件设置的画笔大小
  * @event {Function} init 当创建完 canvas 实例后触发，向外提供 canvas实例，撤回，清空方法
  * @example <v-sign @init="signInit"></v-sign>
  */
@@ -49,10 +49,9 @@ export default {
 			type: [String, Number],
 			default: 300
 		},
-		// 线宽
+		// 画笔大小，权重大于 v-sign-pen 组件设置的画笔大小
 		lineWidth: {
-			type: Number,
-			default: 4
+			type: Number
 		},
 		// 线颜色
 		lineColor: {
@@ -75,7 +74,8 @@ export default {
 			formatSize,
 			lineData: [],
 			winWidth: 0,
-			winHeight: 0
+			winHeight: 0,
+			penLineWidth: null, // v-sign-pen 组件设置的画笔大小
 		}
 	},
 	mounted() {
@@ -96,7 +96,7 @@ export default {
 			this.lineData.push({
 				style: {
 					color: this.lineColor,
-					width: this.lineWidth
+					width: this.lineWidth || this.penLineWidth || 4
 				},
 				// 屏幕坐标
 				coordinates: [
@@ -164,6 +164,7 @@ export default {
 				startPos = coordinates[coordinatesLen - 2]
 				endPos = coordinates[coordinatesLen - 1]
 			}
+			
 			const style = currentLineData.style
 			canvasCtx.beginPath()
 			canvasCtx.setLineCap('round')
@@ -178,7 +179,6 @@ export default {
 			canvasCtx.stroke()
 			canvasCtx.draw(true)
 		},
-
 		canvasToTempFilePath(conf = {}) {
 			return new Promise((resolve, reject) => {
 				uni.canvasToTempFilePath(
@@ -197,13 +197,17 @@ export default {
 				)
 			})
 		},
+		setLineWidth(numberVal) {
+			this.penLineWidth = numberVal
+		},
 		provideInterface() {
 			return {
 				cid: this.cid,
 				ctx: canvasCtx,
 				clear: this.clear,
 				revoke: this.revoke,
-				canvasToTempFilePath: this.canvasToTempFilePath
+				canvasToTempFilePath: this.canvasToTempFilePath,
+				setLineWidth: this.setLineWidth
 			}
 		},
 		/**
@@ -221,7 +225,7 @@ export default {
 			let x1 = (x - (1 - t) * (1 - t) * x0 - t * t * x2) / (2 * t * (1 - t))
 			let y1 = (y - (1 - t) * (1 - t) * y0 - t * t * y2) / (2 * t * (1 - t))
 			return { x: x1, y: y1 }
-		},
+		}
 	}
 }
 </script>
