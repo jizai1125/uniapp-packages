@@ -151,16 +151,6 @@
 
 ### API
 
-
-
- * @property {Array} sizes 画笔大小数组，单位是px
- * @property {String} color 圆圈颜色
- * @property {String} activeColor 选中项颜色
- * @property {Object} customStyle 圆圈自定义样式
- * @property {Number} bigger 圆圈变大变粗倍数
- * @property {Number} minSize 圆圈最小大小，单位 px
- * @event {Function} change 选择画笔大小时触发
-
 ### 属性 (Props)
 
 |   属性名    |  类型  |      默认值      |            说明            |
