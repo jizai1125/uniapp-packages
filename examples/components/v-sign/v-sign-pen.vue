@@ -38,9 +38,9 @@
 								boxShadow:
 									border && currentSelect.size === item.size
 										? `0 0 0 1px ${activeColor}`
-										: '',
-								customStyle
-							}
+										: ''
+							},
+							customStyle
 						]"
 					></view>
 				</template>
@@ -83,7 +83,7 @@ export default {
 			default: type_style.CIRCLE
 		},
 		label: {
-			type: String,
+			type: String
 		},
 		// 画笔大小数组，单位是px
 		sizes: {
@@ -173,11 +173,13 @@ export default {
 		border-radius: 50%;
 		margin: 0 auto;
 		border: 4rpx solid #fff;
+		box-sizing: content-box;
 	}
 	.line {
 		width: 20px;
 		margin: 0 auto;
 		border: 4rpx solid #fff;
+		box-sizing: content-box;
 	}
 	.options {
 		display: flex;
