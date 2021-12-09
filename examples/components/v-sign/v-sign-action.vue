@@ -135,7 +135,6 @@ export default {
 		padding: 0 12rpx;
 		min-width: 88rpx;
 		white-space: nowrap;
-		margin-bottom: 12rpx;
 		&:last-child {
 			margin-right: 0;
 		}
