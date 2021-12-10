@@ -25,7 +25,7 @@
  * @event {Function} 点击对应类型按钮触发对应事件， 例如点击 clear 则触发 clear 事件
  * @example 示例
  **/
-import { formatSize } from './utils'
+import { formatSize } from '../../utils'
 
 // v-sign 父组件提供的接口
 let vSignInterface
@@ -41,22 +41,22 @@ const btnsConf = [
 	{
 		label: '清空',
 		action: btn_type.CLEAR,
-		icon: '/static/v-sign/clear.png'
+		icon: '../../static/image/clear.png'
 	},
 	{
 		label: '撤回',
 		action: btn_type.PREV,
-		icon: '/static/v-sign/prev.png'
+		icon: '../../static/image/prev.png'
 	},
 	// {
 	// 	label: '取消撤回',
 	// 	action: btn_type.NEXT,
-	// 	icon: '/static/v-sign/next.png'
+	// 	icon: '../../static/image/next.png'
 	// },
 	{
 		label: '保存',
 		action: btn_type.SAVE,
-		icon: '/static/v-sign/save.png'
+		icon: '../../static/image/save.png'
 	}
 ]
 export default {

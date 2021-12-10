@@ -26,13 +26,7 @@
 </template>
 
 <script>
-import vSignAction from '@/components/v-sign/v-sign-action'
-import vSignPen from '@/components/v-sign/v-sign-pen'
 export default {
-	components: {
-		vSignAction,
-		vSignPen
-	},
 	data() {
 		return {}
 	},

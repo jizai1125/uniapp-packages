@@ -26,7 +26,7 @@
  * @event {Function} init 当创建完 canvas 实例后触发，向外提供 canvas实例，撤回，清空方法
  * @example <v-sign @init="signInit"></v-sign>
  */
-import { formatSize } from './utils'
+import { formatSize } from '../../utils'
 // convas 实例
 let canvasCtx
 
