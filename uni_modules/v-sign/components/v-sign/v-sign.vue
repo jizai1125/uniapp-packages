@@ -137,13 +137,19 @@ export default {
 				canvasCtx.setLineCap('round')
 				canvasCtx.setStrokeStyle(item.style.color)
 				canvasCtx.setLineWidth(item.style.width)
-				item.coordinates.forEach(pos => {
-					if (pos.type == 'touchstart') {
-						canvasCtx.moveTo(pos.x, pos.y)
-					} else {
-						canvasCtx.lineTo(pos.x, pos.y)
-					}
-				})
+				if (item.coordinates.length < 2) {
+					const pos = item.coordinates[0]
+					canvasCtx.moveTo(pos.x, pos.y)
+					canvasCtx.lineTo(pos.x + 1, pos.y)
+				} else {
+					item.coordinates.forEach(pos => {
+						if (pos.type == 'touchstart') {
+							canvasCtx.moveTo(pos.x, pos.y)
+						} else {
+							canvasCtx.lineTo(pos.x, pos.y)
+						}
+					})
+				}
 				canvasCtx.stroke()
 			})
 			canvasCtx.draw()
