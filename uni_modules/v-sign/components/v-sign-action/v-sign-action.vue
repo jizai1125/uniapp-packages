@@ -41,22 +41,22 @@ const btnsConf = [
 	{
 		label: '清空',
 		action: btn_type.CLEAR,
-		icon: '../../static/image/clear.png'
+		icon: '../../static/image/clear.svg'
 	},
 	{
 		label: '撤回',
 		action: btn_type.PREV,
-		icon: '../../static/image/prev.png'
+		icon: '../../static/image/prev.svg'
 	},
 	// {
 	// 	label: '取消撤回',
 	// 	action: btn_type.NEXT,
-	// 	icon: '../../static/image/next.png'
+	// 	icon: '../../static/image/next.svg'
 	// },
 	{
 		label: '保存',
 		action: btn_type.SAVE,
-		icon: '../../static/image/save.png'
+		icon: '../../static/image/save.svg'
 	}
 ]
 export default {
@@ -139,7 +139,7 @@ export default {
 			margin-right: 0;
 		}
 		&.border {
-			border: 2rpx solid #666;
+			border: 2rpx solid #333;
 			border-radius: 12rpx;
 		}
 		.icon {
@@ -154,7 +154,7 @@ export default {
 			}
 		}
 		.text {
-			color: #666;
+			color: #333;
 			font-size: 28rpx;
 		}
 	}

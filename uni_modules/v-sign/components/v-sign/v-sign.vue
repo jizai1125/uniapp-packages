@@ -20,9 +20,9 @@
  * @property {String} cid canvas id 不设置则默认为 v-sign-时间戳
  * @property {String, Number} width canvas 宽度
  * @property {String, Number} height canvas 高度
- * @property {Object} customStyle 自定义样式
- * @property {String} lineColor 画笔颜色
- * @property {Number} lineWidth 画笔大小，权重大于 v-sign-pen 组件设置的画笔大小
+ * @property {Object} customStyle canvas 自定义样式
+ * @property {String} lineWidth 画笔大小，权重小于 v-sign-pen 组件设置的画笔大小
+ * @property {Number} lineColor 画笔颜色，权重小于 v-sign-pen 组件设置的画笔大小
  * @event {Function} init 当创建完 canvas 实例后触发，向外提供 canvas实例，撤回，清空方法
  * @example <v-sign @init="signInit"></v-sign>
  */
@@ -49,14 +49,15 @@ export default {
 			type: [String, Number],
 			default: 300
 		},
-		// 画笔大小，权重大于 v-sign-pen 组件设置的画笔大小
+		// 画笔大小，权重小于 v-sign-pen 组件设置的画笔大小 penLineWidth
 		lineWidth: {
-			type: Number
+			type: Number,
+			default: 4
 		},
-		// 线颜色
+		// 线颜色，权重小于 v-sign-color 组件设置的画笔颜色 penLineColor
 		lineColor: {
 			type: String,
-			default: '#000'
+			default: '#333'
 		},
 		// canvas自定义样式
 		customStyle: {
@@ -76,6 +77,7 @@ export default {
 			winWidth: 0,
 			winHeight: 0,
 			penLineWidth: null, // v-sign-pen 组件设置的画笔大小
+			penLineColor: null // v-sign-color 组件设置的颜色
 		}
 	},
 	mounted() {
@@ -95,8 +97,8 @@ export default {
 			const pos = e.touches[0]
 			this.lineData.push({
 				style: {
-					color: this.lineColor,
-					width: this.lineWidth || this.penLineWidth || 4
+					color: this.penLineColor || this.lineColor,
+					width: this.penLineWidth || this.lineWidth
 				},
 				// 屏幕坐标
 				coordinates: [
@@ -164,7 +166,7 @@ export default {
 				startPos = coordinates[coordinatesLen - 2]
 				endPos = coordinates[coordinatesLen - 1]
 			}
-			
+
 			const style = currentLineData.style
 			canvasCtx.beginPath()
 			canvasCtx.setLineCap('round')
@@ -200,6 +202,9 @@ export default {
 		setLineWidth(numberVal) {
 			this.penLineWidth = numberVal
 		},
+		setLineColor(strValue) {
+			this.penLineColor = strValue
+		},
 		provideInterface() {
 			return {
 				cid: this.cid,
@@ -207,7 +212,8 @@ export default {
 				clear: this.clear,
 				revoke: this.revoke,
 				canvasToTempFilePath: this.canvasToTempFilePath,
-				setLineWidth: this.setLineWidth
+				setLineWidth: this.setLineWidth,
+				setLineColor: this.setLineColor
 			}
 		},
 		/**

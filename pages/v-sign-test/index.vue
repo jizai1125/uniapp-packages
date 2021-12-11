@@ -1,23 +1,26 @@
 <template>
 	<view class="g-container">
 		<!-- <cus-card title="v-sign"> -->
-		<v-sign :customStyle="{ background: 'orange' }">
+		<v-sign height="400" :customStyle="{ background: 'orange' }">
 			<view class="control-area">
 				<view>按钮组件：</view>
 				<view class="section">
-					<v-sign-action :border="false" @save="save"></v-sign-action>
+					<v-sign-action @save="save"></v-sign-action>
+					<v-sign-action :border="false" @save="save" :customStyle="{marginTop: '10rpx'}" ></v-sign-action>
 				</view>
 				<view>画笔组件：</view>
 				<view class="section">
-					<v-sign-pen label="默认样式"></v-sign-pen>
-					<v-sign-pen label="样式2" active-color="orange" :border="false"></v-sign-pen>
-					<v-sign-pen label="样式3" type="line"></v-sign-pen>
-					<v-sign-pen
-						label="样式4"
-						type="line"
-						:border="false"
-						active-color="orange"
-					></v-sign-pen>
+					<v-sign-pen></v-sign-pen>
+					<v-sign-pen active-color="orange" :border="false"></v-sign-pen>
+					<v-sign-pen type="line"></v-sign-pen>
+					<v-sign-pen type="line" :border="false" active-color="orange"></v-sign-pen>
+				</view>
+				<view>颜色选择器组件：</view>
+				<view class="section">
+					<v-sign-color></v-sign-color>
+					<v-sign-color type="circle"></v-sign-color>
+					<v-sign-color :tick="false" border></v-sign-color>
+					<v-sign-color type="circle" border></v-sign-color>
 				</view>
 			</view>
 		</v-sign>

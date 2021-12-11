@@ -3,7 +3,7 @@
 		{
 			"path": "pages/v-sign-test/index",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "签名"
 			}
 		}
 	],

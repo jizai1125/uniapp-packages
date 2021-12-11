@@ -31,7 +31,7 @@
 <script>
 /**
  * v-sign-pen 画笔（v-sign 子组件）
- * @description 控制 v-sign 画笔的线宽
+ * @description 设置 v-sign 画笔的线宽
  * @tutorial
  * @property {String} type 选项样式 line / circle
  * @property {String} label 标签

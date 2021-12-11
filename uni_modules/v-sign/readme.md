@@ -40,8 +40,8 @@
 |    width    | String/Number |     100%      | canvas 宽度，Number 单位 rpx |
 |   height    | String/Number |    300rpx     | canvas 高度，Number 单位 rpx |
 | customStyle |    Object     |       -       |      canvas 自定义样式       |
-|  lineWidth  |    Number     |       4       |             线宽             |
-|  lineColor  |    String     |     #000      |            线颜色            |
+|  lineWidth  |    Number     |       4       |        线宽，单位 px         |
+|  lineColor  |    String     |     #333      |            线颜色            |
 
 ### 事件（Events）
 
@@ -64,11 +64,13 @@
 	// 撤回
 	revoke: Function,
     // 返回为图片临时文件路径，用法同 uni.canvasToTempFilePath方法，内部只是做了 Promise 化处理而已
-    canvasToTempFilePath: <Promise>Function
+    canvasToTempFilePath: <Promise>Function,
+    setLineWidth: Function,
+    setLineColor: Function
 }
 ```
 
-完整示例：
+示例：
 
 ```html
 <template>
@@ -107,27 +109,12 @@
 
 ## 按钮控件（v-sign-action）
 
-### API
-
-### 属性 (Props)
-
-|   属性名    |     类型      |          默认值           |                          说明                          |
-| :---------: | :-----------: | :-----------------------: | :----------------------------------------------------: |
-|   actions   |     Array     | ["clear", "prev", "save"] | 按钮配置；清空（clear）, 撤回（prev） 保存图片（save） |
-|   border    |    Boolean    |           true            |                     按钮是否有边框                     |
-|    space    | String/Number |          300rpx           |               按钮间隔，Number 单位 rpx                |
-| customStyle |    Object     |             -             |                    根元素自定义样式                    |
-
-### 事件（Events）
-
-点击对应类型按钮触发对应事件， 例如点击 清空（clear）按钮则触发 clear 事件
-
 ### 示例
 
 ```html
 <template>
     <v-sign>
-		<v-sign-action @save="save"></v-sign-action>
+		<v-sign-action @save="save" @clear="clear" @prev="revoke"></v-sign-action>
 	</v-sign>
 </template>
 <script>
@@ -141,7 +128,38 @@
 </script>
 ```
 
+### API
+
+### 属性 (Props)
+
+|   属性名    |     类型      |          默认值           |                          说明                          |
+| :---------: | :-----------: | :-----------------------: | :----------------------------------------------------: |
+|   actions   |     Array     | ["clear", "prev", "save"] | 按钮配置；清空（clear）, 撤回（prev） 保存图片（save） |
+|   border    |    Boolean    |           true            |                     按钮是否有边框                     |
+|    space    | String/Number |          300rpx           |               按钮间隔，Number 单位 rpx                |
+| customStyle |    Object     |             -             |                    根元素自定义样式                    |
+
+### 事件（Events）
+
+点击对应类型按钮触发对应事件， 例如：配置了清空（clear）按钮，点击则触发 clear 事件
+
+---
+
 ## 画笔组件（v-sign-pen）
+
+### 示例
+
+```html
+<template>
+    <v-sign>
+		<v-sign-pen></v-sign-pen>
+	</v-sign>
+</template>
+<script>
+    export default {
+    }
+</script>
+```
 
 ### API
 
@@ -166,12 +184,16 @@
 | :------: | :----------------: | :----------------: |
 | @change  | 选择画笔大小时触发 | size：画笔尺寸大小 |
 
+---
+
+## 颜色选择器组件（v-sign-color）
+
 ### 示例
 
 ```html
 <template>
     <v-sign>
-		<v-sign-pen></v-sign-pen>
+		<v-sign-color></v-sign-color>
 	</v-sign>
 </template>
 <script>
@@ -180,3 +202,24 @@
 </script>
 ```
 
+### API
+
+### 属性 (Props)
+
+|   属性名    |     类型      |                            默认值                            |         说明          |
+| :---------: | :-----------: | :----------------------------------------------------------: | :-------------------: |
+|    type     |    String     |                            square                            | 选项样式，可选 circle |
+|    color    |    String     |                              -                               |       默认颜色        |
+|   options   |     Array     | ['#333', '#f44236', '#3f51b5', '#2195f3', '#ffeb3b', '#ff9900'] |        备选色         |
+|    size     | Number/String |                              44                              | 圆/方形大小，单位 rpx |
+|    tick     |    Boolean    |                             true                             |     是否选中打勾      |
+|  tickSize   | Number/String |                              24                              |        勾大小         |
+| borderColor |    String     |                             #fff                             |       边框颜色        |
+|   border    |    Boolean    |                            false                             |      是否有边框       |
+|    space    | Number/String |                              16                              |       选项间隙        |
+
+### 事件（Events）
+
+| 事件称名 |      说明      | 返回值 |
+| :------: | :------------: | :----: |
+| @change  | 选择颜色时触发 | color  |
