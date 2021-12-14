@@ -136,7 +136,7 @@
 | :---------: | :-----------: | :-----------------------: | :----------------------------------------------------: |
 |   actions   |     Array     | ["clear", "prev", "save"] | 按钮配置；清空（clear）, 撤回（prev） 保存图片（save） |
 |   border    |    Boolean    |           true            |                     按钮是否有边框                     |
-|    space    | String/Number |          300rpx           |               按钮间隔，Number 单位 rpx                |
+|    space    | String/Number |            12             |               按钮间隔，Number 单位 rpx                |
 | customStyle |    Object     |             -             |                    根元素自定义样式                    |
 
 ### 事件（Events）
@@ -174,7 +174,7 @@
 | activeColor | String  |       #333       |          选中项颜色          |
 |   border    | Boolean |       true       |       选中项是否有边框       |
 | borderWidth | Number  |        4         |      边框大小，单位 rpx      |
-|    space    | Number  |      20rpx       |      选项间隙，单位 rpx      |
+|    space    | Number  |        20        |      选项间隙，单位 rpx      |
 |   bigger    | Number  |        2         |       圆点变大变粗倍数       |
 |   minSize   | Number  |        4         |    圆点最小尺寸，单位 px     |
 

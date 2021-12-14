@@ -41,22 +41,23 @@ const btnsConf = [
 	{
 		label: '清空',
 		action: btn_type.CLEAR,
-		icon: '../../static/image/clear.svg'
+		// 自定义组件里面使用 <image>时，建议使用绝对路径。https://uniapp.dcloud.io/component/image
+		icon: '/uni_modules/v-sign/static/image/clear.svg'
 	},
 	{
 		label: '撤回',
 		action: btn_type.PREV,
-		icon: '../../static/image/prev.svg'
+		icon: '/uni_modules/v-sign/static/image/prev.svg'
 	},
 	// {
 	// 	label: '取消撤回',
 	// 	action: btn_type.NEXT,
-	// 	icon: '../../static/image/next.svg'
+	// 	icon: '/uni_modules/v-sign/static/image/next.svg'
 	// },
 	{
 		label: '保存',
 		action: btn_type.SAVE,
-		icon: '../../static/image/save.svg'
+		icon: '/uni_modules/v-sign/static/image/save.svg'
 	}
 ]
 export default {

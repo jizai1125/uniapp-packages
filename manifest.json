@@ -50,14 +50,15 @@
     "quickapp" : {},
     /* 小程序特有相关 */
     "mp-weixin" : {
-        "appid" : "wxbf8ffcf264a8f480",
+        "appid" : "wxde16dab17ebdc2ee",
         "setting" : {
             "urlCheck" : false
         },
         "usingComponents" : true
     },
     "mp-alipay" : {
-        "usingComponents" : true
+        "usingComponents" : true,
+        "appid" : "2021003103688503"
     },
     "mp-baidu" : {
         "usingComponents" : true
@@ -68,5 +69,10 @@
     "uniStatistics" : {
         "enable" : false
     },
-    "vueVersion" : "2"
+    "vueVersion" : "2",
+    "h5" : {
+        "devServer" : {
+            "disableHostCheck" : true
+        }
+    }
 }
