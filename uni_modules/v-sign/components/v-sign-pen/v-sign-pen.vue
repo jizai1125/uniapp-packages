@@ -105,7 +105,7 @@ export default {
 			default: 4
 		}
 	},
-	inject: ['getInterface'],
+	inject: ['getSignInterface'],
 	data() {
 		return {
 			type_style,
@@ -142,7 +142,7 @@ export default {
 		this.currentSelect = this.csizes[0]
 	},
 	mounted() {
-		vSignInterface = this.getInterface()
+		vSignInterface = this.getSignInterface()
 		this.setLineWidth()
 	},
 	methods: {

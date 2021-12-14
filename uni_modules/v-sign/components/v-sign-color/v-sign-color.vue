@@ -90,7 +90,7 @@ export default {
 			default: 16
 		}
 	},
-	inject: ['getInterface'],
+	inject: ['getSignInterface'],
 	data() {
 		return {
 			formatSize,
@@ -118,7 +118,7 @@ export default {
 		}
 	},
 	mounted() {
-		vSignInterface = this.getInterface()
+		vSignInterface = this.getSignInterface()
 		this.setLineColor()
 	},
 	methods: {

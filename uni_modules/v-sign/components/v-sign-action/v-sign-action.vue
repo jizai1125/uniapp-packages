@@ -84,7 +84,7 @@ export default {
 			default: () => ({})
 		}
 	},
-	inject: ['getInterface'],
+	inject: ['getSignInterface'],
 	data() {
 		return {
 			formatSize
@@ -96,7 +96,7 @@ export default {
 		}
 	},
 	mounted() {
-		vSignInterface = this.getInterface()
+		vSignInterface = this.getSignInterface()
 	},
 	methods: {
 		async onBtnClick(btn) {

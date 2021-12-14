@@ -67,7 +67,7 @@ export default {
 	},
 	provide() {
 		return {
-			getInterface: this.provideInterface
+			getSignInterface: this.provideSignInterface
 		}
 	},
 	data() {
@@ -82,8 +82,8 @@ export default {
 	},
 	mounted() {
 		canvasCtx = uni.createCanvasContext(this.cid, this)
-		// 初始化完成，向外暴露接口
-		this.$emit('init', this.provideInterface())
+		// 初始化完成，触发 init 事件
+		this.$emit('init', this.provideSignInterface())
 		// 获取窗口宽高
 		uni.getSystemInfo({
 			success: res => {
@@ -211,7 +211,8 @@ export default {
 		setLineColor(strValue) {
 			this.penLineColor = strValue
 		},
-		provideInterface() {
+		// 向外暴露内部方法
+		provideSignInterface() {
 			return {
 				cid: this.cid,
 				ctx: canvasCtx,
