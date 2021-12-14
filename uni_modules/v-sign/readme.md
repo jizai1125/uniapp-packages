@@ -60,13 +60,15 @@
     // canvas 实例
 	ctx: Object,
 	// 清空画布
-	clear: Function,
+	function clear(){},
 	// 撤回
-	revoke: Function,
-    // 返回为图片临时文件路径，用法同 uni.canvasToTempFilePath方法，内部只是做了 Promise 化处理而已
-    canvasToTempFilePath: <Promise>Function,
-    setLineWidth: Function,
-    setLineColor: Function
+	function revoke(){},
+    // 保存 png 图片，文件名 filename 配置仅支持 h5
+    function saveImage(filename): Promise<object> {},
+    // 返回图片临时文件路径，object参数同 uni.canvasToTempFilePath方法，内部只是做了 Promise 化处理而已
+    function canvasToTempFilePath(object): Promise<object> {},
+    function setLineWidth(){},
+    function setLineColor(){}
 }
 ```
 
@@ -77,7 +79,7 @@
 	<v-sign @init="onSignInit"></v-sign>
 	<button @click="clear">清空<button>
 	<button @click="revoke">撤回<button>
-    <button @click="saveTempFile">保存<button>
+    <button @click="saveImage">保存图片<button>
 </template>
 <script>
     export default {
@@ -93,12 +95,9 @@
 			revoke() {
                 this.signCtx.revoke()
             },
-            // 保存
-            saveTempFile() {
-                this.signCtx.canvasToTempFilePath({fileType: 'jpg'})
-                  	.then(filePath => {
-                    	console.log(filePath)
-	                })
+            // 保存图片
+            saveImage() {
+                this.signCtx.saveImage()
             }
         }
     }

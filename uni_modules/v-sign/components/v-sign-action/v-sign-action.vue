@@ -100,7 +100,6 @@ export default {
 	},
 	methods: {
 		async onBtnClick(btn) {
-			// console.log(btn, btn.action)
 			let emit_result
 			switch (btn.action) {
 				case btn_type.CLEAR:
@@ -113,7 +112,7 @@ export default {
 				// 	console.log('next')
 				// 	break
 				case btn_type.SAVE:
-					emit_result = await vSignInterface.canvasToTempFilePath()
+					emit_result = await vSignInterface.saveImage()
 					break
 				default:
 					break
@@ -138,6 +137,10 @@ export default {
 		white-space: nowrap;
 		&:last-child {
 			margin-right: 0;
+		}
+		&:active {
+			transition: transform 0.3s;
+			transform: scale(1.1);
 		}
 		&.border {
 			border: 2rpx solid #333;

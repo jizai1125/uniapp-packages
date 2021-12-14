@@ -187,6 +187,38 @@ export default {
 			canvasCtx.stroke()
 			canvasCtx.draw(true)
 		},
+		// 保存png图片，文件名配置 filename 仅支持 h5
+		async saveImage(filename = '签名') {
+			const tempFilePath = await this.canvasToTempFilePath()
+			return new Promise((resolve, reject) => {
+				// #ifdef H5
+				try {
+					const a = document.createElement('a')
+					a.href = tempFilePath
+					a.download = filename
+					document.body.appendChild(a)
+					a.click()
+					a.remove()
+					resolve({ errMsg: 'saveImageH5:ok' })
+				} catch (e) {
+					console.error(e)
+					reject(e)
+				}
+				// #endif
+				// #ifndef H5
+				uni.saveImageToPhotosAlbum({
+					filePath: tempFilePath,
+					success(resObj) {
+						resolve(resObj)
+					},
+					fail(err) {
+						reject(err)
+					}
+				})
+				// #endif
+			})
+		},
+		// canvas 保存为临时图片路径，h5 为base64
 		canvasToTempFilePath(conf = {}) {
 			return new Promise((resolve, reject) => {
 				uni.canvasToTempFilePath(
@@ -218,6 +250,7 @@ export default {
 				ctx: canvasCtx,
 				clear: this.clear,
 				revoke: this.revoke,
+				saveImage: this.saveImage,
 				canvasToTempFilePath: this.canvasToTempFilePath,
 				setLineWidth: this.setLineWidth,
 				setLineColor: this.setLineColor

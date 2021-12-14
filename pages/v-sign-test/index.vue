@@ -1,12 +1,16 @@
 <template>
 	<view class="g-container">
 		<!-- <cus-card title="v-sign"> -->
-		<v-sign height="400" :customStyle="{ background: 'orange' }">
+		<v-sign height="400" :customStyle="{ background: 'orange' }" @init="onSignInit">
 			<view class="control-area">
 				<view>按钮组件：</view>
 				<view class="section">
 					<v-sign-action @save="save"></v-sign-action>
-					<v-sign-action :border="false" @save="save" :customStyle="{marginTop: '10rpx'}" ></v-sign-action>
+					<v-sign-action
+						:border="false"
+						@save="save"
+						:customStyle="{ marginTop: '10rpx' }"
+					></v-sign-action>
 				</view>
 				<view>画笔组件：</view>
 				<view class="section">
@@ -34,9 +38,14 @@ export default {
 		return {}
 	},
 	methods: {
-		save(tempFilePath) {
-			console.log(tempFilePath)
-		}
+		onSignInit(signCtx) {
+			console.log(signCtx)
+			this.signCtx = signCtx
+		},
+		save(res) {
+			console.log(res)
+		},
+		
 	}
 }
 </script>

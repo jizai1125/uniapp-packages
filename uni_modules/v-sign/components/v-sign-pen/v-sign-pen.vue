@@ -195,6 +195,10 @@ export default {
 			&:last-child {
 				margin-right: 0;
 			}
+			&:active {
+				transition: transform 0.3s;
+				transform: scale(1.1);
+			}
 			.circle {
 				border-radius: 50%;
 				padding: 4rpx;
