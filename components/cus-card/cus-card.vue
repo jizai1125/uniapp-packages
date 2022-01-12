@@ -8,7 +8,12 @@
 <script>
 export default {
 	name: 'cus-card',
-	props: ['title'],
+	props: {
+		title: {
+			type: String,
+			default: ''
+		}
+	},
 	data() {
 		return {}
 	}
@@ -18,10 +23,11 @@ export default {
 <style lang="scss" scoped>
 .cus-card {
 	padding: 10px;
-	box-shadow: 0 6px 26px 2px rgba(0, 188, 212, 0.4);
+	margin: 20px 4%;
+	border-radius: 10px;
+	box-shadow: 0 6px 12px 0px rgba(0, 188, 212, 0.4);
 }
 .title {
-	font-size: 20px;
 	color: #8f8f94;
 }
 .content {

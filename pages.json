@@ -1,9 +1,21 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/v-sign-test/index",
+			"path": "pages/home/index",
 			"style": {
-				"navigationBarTitleText": "签名"
+				"navigationBarTitleText": "签名组件"
+			}
+		},
+		{
+			"path": "pages/v-sign-simple/index",
+			"style": {
+				"navigationBarTitleText": "签名组件-简单示例"
+			}
+		},
+		{
+			"path": "pages/v-sign-sub-comp/index",
+			"style": {
+				"navigationBarTitleText": "签名组件-子组件"
 			}
 		}
 	],
