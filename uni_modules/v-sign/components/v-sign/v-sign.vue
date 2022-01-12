@@ -27,8 +27,6 @@
  * @example <v-sign @init="signInit"></v-sign>
  */
 import { formatSize } from '../../utils'
-// convas 实例
-let canvasCtx
 
 export default {
 	name: 'v-sign',
@@ -81,7 +79,7 @@ export default {
 		}
 	},
 	mounted() {
-		canvasCtx = uni.createCanvasContext(this.cid, this)
+		this.canvasCtx = uni.createCanvasContext(this.cid, this)
 		// 初始化完成，触发 init 事件
 		this.$emit('init', this.provideSignInterface())
 		// 获取窗口宽高
@@ -126,33 +124,33 @@ export default {
 		// 清空画布
 		clear() {
 			this.lineData = []
-			canvasCtx.clearRect(0, 0, this.winWidth, this.winHeight)
-			canvasCtx.draw()
+			this.canvasCtx.clearRect(0, 0, this.winWidth, this.winHeight)
+			this.canvasCtx.draw()
 		},
 		// 撤销
 		revoke() {
 			this.lineData.pop()
 			this.lineData.forEach((item, index) => {
-				canvasCtx.beginPath()
-				canvasCtx.setLineCap('round')
-				canvasCtx.setStrokeStyle(item.style.color)
-				canvasCtx.setLineWidth(item.style.width)
+				this.canvasCtx.beginPath()
+				this.canvasCtx.setLineCap('round')
+				this.canvasCtx.setStrokeStyle(item.style.color)
+				this.canvasCtx.setLineWidth(item.style.width)
 				if (item.coordinates.length < 2) {
 					const pos = item.coordinates[0]
-					canvasCtx.moveTo(pos.x, pos.y)
-					canvasCtx.lineTo(pos.x + 1, pos.y)
+					this.canvasCtx.moveTo(pos.x, pos.y)
+					this.canvasCtx.lineTo(pos.x + 1, pos.y)
 				} else {
 					item.coordinates.forEach(pos => {
 						if (pos.type == 'touchstart') {
-							canvasCtx.moveTo(pos.x, pos.y)
+							this.canvasCtx.moveTo(pos.x, pos.y)
 						} else {
-							canvasCtx.lineTo(pos.x, pos.y)
+							this.canvasCtx.lineTo(pos.x, pos.y)
 						}
 					})
 				}
-				canvasCtx.stroke()
+				this.canvasCtx.stroke()
 			})
-			canvasCtx.draw()
+			this.canvasCtx.draw()
 		},
 		// 绘制线条
 		drawLine() {
@@ -174,18 +172,18 @@ export default {
 			}
 
 			const style = currentLineData.style
-			canvasCtx.beginPath()
-			canvasCtx.setLineCap('round')
-			canvasCtx.setStrokeStyle(style.color)
-			canvasCtx.setLineWidth(style.width)
-			canvasCtx.moveTo(startPos.x, startPos.y)
-			canvasCtx.lineTo(endPos.x, endPos.y)
+			this.canvasCtx.beginPath()
+			this.canvasCtx.setLineCap('round')
+			this.canvasCtx.setStrokeStyle(style.color)
+			this.canvasCtx.setLineWidth(style.width)
+			this.canvasCtx.moveTo(startPos.x, startPos.y)
+			this.canvasCtx.lineTo(endPos.x, endPos.y)
 			// const P1 = this.caculateBezier(startPos, endPos, centerPos)
 			// console.log(P1.x, P1.y)
-			// canvasCtx.moveTo(startPos.x, startPos.y)
-			// canvasCtx.quadraticCurveTo(P1.x, P1.y, endPos.x, endPos.y)
-			canvasCtx.stroke()
-			canvasCtx.draw(true)
+			// this.canvasCtx.moveTo(startPos.x, startPos.y)
+			// this.canvasCtx.quadraticCurveTo(P1.x, P1.y, endPos.x, endPos.y)
+			this.canvasCtx.stroke()
+			this.canvasCtx.draw(true)
 		},
 		// 保存png图片，文件名配置 filename 仅支持 h5
 		async saveImage(filename = '签名') {
@@ -247,7 +245,7 @@ export default {
 		provideSignInterface() {
 			return {
 				cid: this.cid,
-				ctx: canvasCtx,
+				ctx: this.canvasCtx,
 				clear: this.clear,
 				revoke: this.revoke,
 				saveImage: this.saveImage,

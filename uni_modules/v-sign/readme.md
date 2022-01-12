@@ -51,24 +51,24 @@
 
 ### 事件回调参数说明
 
-##### init
+#### **`init(ctx: SignCtx)`**
 
-可以通过该事件回调暴露的 clear、revoke 等方法。
+可以通过该事件回调暴露的 clear、revoke 等方法操作画布。
 
-```js
-{
+```java
+interface SignCtx {
     // canvas 实例
-	ctx: Object,
+	ctx: object;
 	// 清空画布
-	function clear(){},
+	clear(): void;
 	// 撤回
-	function revoke(){},
+	revoke(): void;
     // 保存 png 图片，文件名 filename 配置仅支持 h5
-    function saveImage(filename): Promise<object> {},
+    saveImage(filename: string): Promise<object>;
     // 返回图片临时文件路径，object参数同 uni.canvasToTempFilePath方法，内部只是做了 Promise 化处理而已
-    function canvasToTempFilePath(object): Promise<object> {},
-    function setLineWidth(){},
-    function setLineColor(){}
+    canvasToTempFilePath(config: object): Promise<object>;
+    setLineWidth(value: number): void;
+    setLineColor(value: string): void;
 }
 ```
 
@@ -140,7 +140,7 @@
 
 ### 事件（Events）
 
-点击对应类型按钮触发对应事件， 例如：配置了清空（clear）按钮，点击则触发 clear 事件
+点击对应类型按钮触发对应事件， 例如：配置了清空（clear）按钮，点击则触发 clear 事件。
 
 ---
 
