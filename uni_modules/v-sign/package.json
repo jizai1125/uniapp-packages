@@ -10,7 +10,7 @@
     "电子签名",
     "signature"
 ],
-  "repository": "",
+  "repository": "https://github.com/jizai1125/v-sign",
   "engines": {
     "HBuilderX": "^3.1.0"
   },
