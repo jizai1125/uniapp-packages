@@ -7,7 +7,7 @@
 			:style="[{ 'margin-right': formatSize(space) }]"
 			@click="onBtnClick(item)"
 		>
-			<image :class="['icon', 'icon-' + item.action]" :src="item.icon"></image>
+			<image v-if="item.icon" :class="['icon', 'icon-' + item.action]" :src="item.icon"></image>
 			<text class="text">{{ item.label }}</text>
 		</view>
 	</view>
@@ -41,13 +41,12 @@ const btnsConf = [
 	{
 		label: '清空',
 		action: btn_type.CLEAR,
-		// 自定义组件里面使用 <image>时，建议使用绝对路径。https://uniapp.dcloud.io/component/image
-		icon: '/uni_modules/v-sign/static/image/clear.svg'
+		icon: require('../../static/image/clear.svg')
 	},
 	{
 		label: '撤回',
 		action: btn_type.PREV,
-		icon: '/uni_modules/v-sign/static/image/prev.svg'
+		icon: require('../../static/image/prev.svg')
 	},
 	// {
 	// 	label: '取消撤回',
@@ -57,7 +56,7 @@ const btnsConf = [
 	{
 		label: '保存',
 		action: btn_type.SAVE,
-		icon: '/uni_modules/v-sign/static/image/save.svg'
+		icon: require('../../static/image/save.svg')
 	}
 ]
 export default {
