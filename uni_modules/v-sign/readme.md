@@ -42,7 +42,7 @@
 | customStyle |    Object     |       -       |      canvas 自定义样式       |
 |  lineWidth  |    Number     |       4       |        线宽，单位 px         |
 |  lineColor  |    String     |     #333      |            线颜色            |
-|   bgColor   |    string     |     #fff      |         画布背景颜色         |
+|   bgColor   |    String     |     #fff      |         画布背景颜色         |
 
 ### 事件（Events）
 
