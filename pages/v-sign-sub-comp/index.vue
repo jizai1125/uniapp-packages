@@ -1,7 +1,7 @@
 <template>
 	<view class="g-container">
 		<!-- <cus-card title="v-sign"> -->
-		<v-sign height="400" :customStyle="{ background: 'orange' }" @init="onSignInit">
+		<v-sign height="400" bgColor="orange" @init="onSignInit">
 			<view class="control-area">
 				<view>按钮组件：</view>
 				<view class="section">

@@ -10,6 +10,6 @@ export function isNumber(val) {
  * 处理大小单位
  * @param {Object} val
  */
-export function formatSize(val) {
-	return isNumber(val) ? `${val}rpx` : val
+export function formatSize(val, unit = 'rpx') {
+	return isNumber(val) ? `${val}${unit}` : val
 }

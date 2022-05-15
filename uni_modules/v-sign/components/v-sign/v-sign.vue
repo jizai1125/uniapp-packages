@@ -6,7 +6,7 @@
 			@touchstart="onTouchStart"
 			@touchmove="onTouchMove"
 			@touchend="onTouchEnd"
-			:style="[{ width: formatSize(width), height: formatSize(height) }, customStyle]"
+			:style="[{ width: formatSize(width || winWidth, 'px'), height: formatSize(height) }, customStyle]"
 		></canvas>
 		<slot />
 	</view>
@@ -20,6 +20,7 @@
  * @property {String} cid canvas id 不设置则默认为 v-sign-时间戳
  * @property {String, Number} width canvas 宽度
  * @property {String, Number} height canvas 高度
+ * @property {bgColor} bgColor 画布背景颜色
  * @property {Object} customStyle canvas 自定义样式
  * @property {String} lineWidth 画笔大小，权重小于 v-sign-pen 组件设置的画笔大小
  * @property {Number} lineColor 画笔颜色，权重小于 v-sign-pen 组件设置的画笔大小
@@ -39,8 +40,7 @@ export default {
 		},
 		// canvas 宽度
 		width: {
-			type: [String, Number],
-			default: '100%'
+			type: [String, Number]
 		},
 		// canvas 高度
 		height: {
@@ -56,6 +56,11 @@ export default {
 		lineColor: {
 			type: String,
 			default: '#333'
+		},
+		// 画布背景颜色
+		bgColor: {
+			type: String,
+			default: '#fff'
 		},
 		// canvas自定义样式
 		customStyle: {
@@ -79,16 +84,22 @@ export default {
 		}
 	},
 	mounted() {
+		// 获取窗口宽高
+		const {windowWidth, windowHeight} = uni.getSystemInfoSync()
+		this.winWidth = windowWidth
+		this.winHeight = windowHeight
 		this.canvasCtx = uni.createCanvasContext(this.cid, this)
+		// h5 需延迟绘制，否则绘制失败
+		// #ifdef H5
+		setTimeout(() => {
+		// #endif
+			this.setBackgroundColor(this.bgColor)
+		// #ifdef H5
+		}, 10)
+		// #endif
 		// 初始化完成，触发 init 事件
 		this.$emit('init', this.provideSignInterface())
-		// 获取窗口宽高
-		uni.getSystemInfo({
-			success: res => {
-				this.winWidth = res.windowWidth
-				this.winHeight = res.windowHeight
-			}
-		})
+	
 	},
 	methods: {
 		onTouchStart(e) {
@@ -126,6 +137,7 @@ export default {
 			this.lineData = []
 			this.canvasCtx.clearRect(0, 0, this.winWidth, this.winHeight)
 			this.canvasCtx.draw()
+			this.setBackgroundColor(this.bgColor)
 		},
 		// 撤销
 		revoke() {
@@ -151,6 +163,7 @@ export default {
 				this.canvasCtx.stroke()
 			})
 			this.canvasCtx.draw()
+			this.setBackgroundColor(this.bgColor)
 		},
 		// 绘制线条
 		drawLine() {
@@ -216,7 +229,7 @@ export default {
 				// #endif
 			})
 		},
-		// canvas 保存为临时图片路径，h5 为base64
+		// canvas 保存为临时图片路径，h5返回 base64
 		canvasToTempFilePath(conf = {}) {
 			return new Promise((resolve, reject) => {
 				uni.canvasToTempFilePath(
@@ -235,6 +248,13 @@ export default {
 				)
 			})
 		},
+		setBackgroundColor(color = '#fff') {
+			this.canvasCtx.beginPath()
+			this.canvasCtx.setFillStyle(color)
+			this.canvasCtx.fillRect(0, 0, this.winWidth, this.winHeight)
+			this.canvasCtx.fill()
+			this.canvasCtx.draw(true)
+		},
 		setLineWidth(numberVal) {
 			this.penLineWidth = numberVal
 		},
@@ -251,7 +271,8 @@ export default {
 				saveImage: this.saveImage,
 				canvasToTempFilePath: this.canvasToTempFilePath,
 				setLineWidth: this.setLineWidth,
-				setLineColor: this.setLineColor
+				setLineColor: this.setLineColor,
+				setBackgroundColor: this.setBackgroundColor
 			}
 		},
 		/**

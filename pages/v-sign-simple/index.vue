@@ -4,12 +4,14 @@
 		<v-sign
 			cid="1"
 			height="400"
-			:customStyle="{ background: 'orange', display: flag ? 'block' : 'none' }"
+			bgColor="orange"
+			:customStyle="{ display: flag ? 'block' : 'none' }"
 		></v-sign>
 		<v-sign
 			cid="2"
 			height="400"
-			:customStyle="{ background: 'red', display: !flag ? 'block' : 'none' }"
+			bgColor="red"
+			:customStyle="{ display: !flag ? 'block' : 'none' }"
 		></v-sign>
 	</view>
 </template>

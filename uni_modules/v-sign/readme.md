@@ -42,6 +42,7 @@
 | customStyle |    Object     |       -       |      canvas 自定义样式       |
 |  lineWidth  |    Number     |       4       |        线宽，单位 px         |
 |  lineColor  |    String     |     #333      |            线颜色            |
+|   bgColor   |    string     |     #fff      |         画布背景颜色         |
 
 ### 事件（Events）
 
@@ -51,12 +52,12 @@
 
 ### 事件回调参数说明
 
-#### **`init(ctx: SignCtx)`**
+#### **`init(ctx: SignContext)`**
 
 可以通过该事件回调暴露的 clear、revoke 等方法操作画布。
 
 ```java
-interface SignCtx {
+interface SignContext {
     // canvas 实例
 	ctx: object;
 	// 清空画布
@@ -65,8 +66,9 @@ interface SignCtx {
 	revoke(): void;
     // 保存 png 图片，文件名 filename 配置仅支持 h5
     saveImage(filename: string): Promise<object>;
-    // 返回图片临时文件路径，object参数同 uni.canvasToTempFilePath方法，内部只是做了 Promise 化处理而已
+    // 返回图片临时文件路径，config 参数同 uni.canvasToTempFilePath方法，内部只是做了 Promise 化处理而已
     canvasToTempFilePath(config: object): Promise<object>;
+    setBackgroundColor(color: string): void;
     setLineWidth(value: number): void;
     setLineColor(value: string): void;
 }
@@ -79,6 +81,7 @@ interface SignCtx {
 	<v-sign @init="onSignInit"></v-sign>
 	<button @click="clear">清空<button>
 	<button @click="revoke">撤回<button>
+    <button @click="saveTempFilePath">保存临时图片路径<button>
     <button @click="saveImage">保存图片<button>
 </template>
 <script>
@@ -95,7 +98,11 @@ interface SignCtx {
 			revoke() {
                 this.signCtx.revoke()
             },
-            // 保存图片
+            // 保存为临时图片路径，h5返回 base64
+            saveTempFilePath() {
+                this.signCtx.canvasToTempFilePath()
+            },
+            // 保存 png 图片
             saveImage() {
                 this.signCtx.saveImage()
             }
