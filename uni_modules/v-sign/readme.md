@@ -14,26 +14,27 @@
 	<button @click="clear">清空<button>
 </template>
 <script>
-    export default {
-      	data() {
-          return {
-          	winWidth: 0  
-          }
-        },
-        created() {
-        const { windowWidth } = uni.getSystemInfoSync()
-        this.winWidth = windowWidth
+  export default {
+    data() {
+      return {
+        winWidth: 0
+      }
+    },
+    created() {
+      // 宽度设为可使用窗口宽度
+      const { windowWidth } = uni.getSystemInfoSync()
+      this.winWidth = windowWidth
+    },
+    methods: {
+      onSignInit(signCtx) {
+        this.signCtx = signCtx
       },
-        methods: {
-            onSignInit(signCtx) {
-                this.signCtx = signCtx
-            },
-            // 清空
-            clear() {
-                this.signCtx.clear()
-            }
-        }
+      // 清空
+      clear() {
+        this.signCtx.clear()
+      }
     }
+  }
 </script>
 ```
 
@@ -41,15 +42,15 @@
 
 ### 属性 (Props)
 
-|   属性名		|     类型		|    默认值		|             说明				|
-| :---------:	| :-----------:	| :-----------:	| :--------------------------:	|
-|     cid		|    String		| v-sign-时间戳	|          canvas id			|
-|    width		| String/Number	|     -		| canvas 宽度，Number 单位 rpx	|
-|   height		| String/Number	|    -		| canvas 高度，Number 单位 rpx	|
-| customStyle	|    Object		|       -		|      canvas 自定义样式		|
-|  lineWidth	|    Number		|       4		|        线宽，单位 px			|
-|  lineColor	|    String		|     #333		|            线颜色				|
-|   bgColor		|    String		|     #fff		|         画布背景颜色			|
+|   属性名    |     类型      |    默认值     |             说明             |
+| :---------: | :-----------: | :-----------: | :--------------------------: |
+|     cid     |    String     | v-sign-时间戳 |          canvas id           |
+|    width    | String/Number |       -       | canvas 宽度，Number 单位 rpx |
+|   height    | String/Number |       -       | canvas 高度，Number 单位 rpx |
+| customStyle |    Object     |       -       |      canvas 自定义样式       |
+|  lineWidth  |    Number     |       4       |        线宽，单位 px         |
+|  lineColor  |    String     |     #333      |            线颜色            |
+|   bgColor   |    String     |     #fff      |         画布背景颜色         |
 
 ### 事件（Events）
 
@@ -68,22 +69,22 @@
 
 ```java
 interface SignContext {
-    // canvas 实例
+  // canvas 实例
 	ctx: object;
 	// 清空画布
 	clear(): void;
 	// 撤回
 	revoke(): void;
-    // 保存 png 图片，文件名 filename 配置仅支持 h5
-    saveImage(filename: string): Promise<object>;
-    // 返回图片临时文件路径，config 参数同 uni.canvasToTempFilePath方法，内部只是做了 Promise 化处理而已
-    canvasToTempFilePath(config: object): Promise<object>;
-  	// 设置画布背景色
-    setBackgroundColor(color: string): void;
-    setLineWidth(value: number): void;
-    setLineColor(value: string): void;
-    // 获取坐标信息数组
-  	getLineData(): Array<object>;
+  // 保存 png 图片，文件名 filename 配置仅支持 h5
+  saveImage(filename: string): Promise<object>;
+  // 返回图片临时文件路径，config 参数同 uni.canvasToTempFilePath方法，内部只是做了 Promise 化处理而已
+  canvasToTempFilePath(config: object): Promise<object>;
+  // 设置画布背景色
+  setBackgroundColor(color: string): void;
+  setLineWidth(value: number): void;
+  setLineColor(value: string): void;
+  // 获取坐标信息数组
+  getLineData(): Array<object>;
 }
 ```
 
@@ -98,29 +99,29 @@ interface SignContext {
     <button @click="saveImage">保存图片<button>
 </template>
 <script>
-    export default {
-        methods: {
-            onSignInit(signCtx) {
-                this.signCtx = signCtx
-            },
-            // 清空
-            clear() {
-                this.signCtx.clear()
-            },
-            // 撤回
-			revoke() {
-                this.signCtx.revoke()
-            },
-            // 保存为临时图片路径，h5返回 base64
-            saveTempFilePath() {
-                this.signCtx.canvasToTempFilePath()
-            },
-            // 保存 png 图片
-            saveImage() {
-                this.signCtx.saveImage()
-            }
-        }
+  export default {
+    methods: {
+      onSignInit(signCtx) {
+          this.signCtx = signCtx
+      },
+      // 清空
+      clear() {
+          this.signCtx.clear()
+      },
+      // 撤回
+      revoke() {
+          this.signCtx.revoke()
+      },
+      // 保存为临时图片路径，h5返回 base64
+      saveTempFilePath() {
+          this.signCtx.canvasToTempFilePath()
+      },
+      // 保存 png 图片
+      saveImage() {
+          this.signCtx.saveImage()
+      }
     }
+  }
 </script>
 ```
 
