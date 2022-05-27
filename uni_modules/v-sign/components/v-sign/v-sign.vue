@@ -130,7 +130,7 @@ export default {
 			this.drawLine()
 		},
 		onTouchEnd(e) {
-			// console.log(e.type, e)
+			this.$emit('end', this.lineData)
 		},
 		// 清空画布
 		clear() {
@@ -138,9 +138,11 @@ export default {
 			this.canvasCtx.clearRect(0, 0, this.winWidth, this.winHeight)
 			this.canvasCtx.draw()
 			this.setBackgroundColor(this.bgColor)
+			this.$emit('clear')
 		},
 		// 撤销
 		revoke() {
+			this.setBackgroundColor(this.bgColor)
 			this.lineData.pop()
 			this.lineData.forEach((item, index) => {
 				this.canvasCtx.beginPath()
@@ -162,8 +164,8 @@ export default {
 				}
 				this.canvasCtx.stroke()
 			})
-			this.canvasCtx.draw()
-			this.setBackgroundColor(this.bgColor)
+			this.canvasCtx.draw(true)
+			this.$emit('revoke', this.lineData)
 		},
 		// 绘制线条
 		drawLine() {
@@ -272,7 +274,8 @@ export default {
 				canvasToTempFilePath: this.canvasToTempFilePath,
 				setLineWidth: this.setLineWidth,
 				setLineColor: this.setLineColor,
-				setBackgroundColor: this.setBackgroundColor
+				setBackgroundColor: this.setBackgroundColor,
+				getLineData: () => this.lineData,
 			}
 		},
 		/**

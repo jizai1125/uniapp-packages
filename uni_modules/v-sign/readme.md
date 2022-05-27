@@ -1,6 +1,4 @@
-
-
-# v-sign  手写签名
+# v-sign 手写签名
 
 **如有问题或者建议，欢迎留言或加群联系我（群号：736123963）！！！将保持维护！！！**
 
@@ -8,7 +6,7 @@
 
 ## 快速使用
 
-基础示例，具体说明见下方API，**若需要使用内置子组件，见下方子组件说明。**
+基础示例，具体说明见下方 API，**若需要使用内置子组件，见下方子组件说明。**
 
 ```html
 <template>
@@ -46,9 +44,12 @@
 
 ### 事件（Events）
 
-| 事件称名 |                             说明                             |               返回值               |
-| :------: | :----------------------------------------------------------: | :--------------------------------: |
-|  @init   | 创建完 canvas 实例后触发，向外提供 canvas实例，撤回，清空方法 | Object：具体见下方事件回调参数说明 |
+| 事件称名 |                              说明                              |               返回值               |
+| :------: | :------------------------------------------------------------: | :--------------------------------: |
+|  @init   | 创建完 canvas 实例后触发，向外提供 canvas 实例，撤回，清空方法 | Object：具体见下方事件回调参数说明 |
+|  @clear  |                         清空画布后触发                         |                 -                  |
+| @revoke  |                         撤销操作后触发                         |            坐标信息数组            |
+|   @end   |                       每次绘制结束后触发                       |            坐标信息数组            |
 
 ### 事件回调参数说明
 
@@ -68,9 +69,12 @@ interface SignContext {
     saveImage(filename: string): Promise<object>;
     // 返回图片临时文件路径，config 参数同 uni.canvasToTempFilePath方法，内部只是做了 Promise 化处理而已
     canvasToTempFilePath(config: object): Promise<object>;
+  	// 设置画布背景色
     setBackgroundColor(color: string): void;
     setLineWidth(value: number): void;
     setLineColor(value: string): void;
+    // 获取坐标信息数组
+  	getLineData(): Array<object>;
 }
 ```
 
@@ -79,8 +83,8 @@ interface SignContext {
 ```html
 <template>
 	<v-sign @init="onSignInit"></v-sign>
-	<button @click="clear">清空<button>
-	<button @click="revoke">撤回<button>
+		<button @click="clear">清空<button>
+		<button @click="revoke">撤回<button>
     <button @click="saveTempFilePath">保存临时图片路径<button>
     <button @click="saveImage">保存图片<button>
 </template>
@@ -119,18 +123,18 @@ interface SignContext {
 
 ```html
 <template>
-    <v-sign>
-		<v-sign-action @save="save" @clear="clear" @prev="revoke"></v-sign-action>
-	</v-sign>
+  <v-sign>
+    <v-sign-action @save="save" @clear="clear" @prev="revoke"></v-sign-action>
+  </v-sign>
 </template>
 <script>
-    export default {
-        methods: {
-            save(tempFilePath) {
-                console.log(tempFilePath);
-            }
-		}
-    }
+  export default {
+    methods: {
+      save(tempFilePath) {
+        console.log(tempFilePath);
+      },
+    },
+  };
 </script>
 ```
 
@@ -157,13 +161,12 @@ interface SignContext {
 
 ```html
 <template>
-    <v-sign>
-		<v-sign-pen></v-sign-pen>
-	</v-sign>
+  <v-sign>
+    <v-sign-pen></v-sign-pen>
+  </v-sign>
 </template>
 <script>
-    export default {
-    }
+  export default {};
 </script>
 ```
 
@@ -198,13 +201,12 @@ interface SignContext {
 
 ```html
 <template>
-    <v-sign>
-		<v-sign-color></v-sign-color>
-	</v-sign>
+  <v-sign>
+    <v-sign-color></v-sign-color>
+  </v-sign>
 </template>
 <script>
-    export default {
-    }
+  export default {};
 </script>
 ```
 
@@ -212,17 +214,17 @@ interface SignContext {
 
 ### 属性 (Props)
 
-|   属性名    |     类型      |                            默认值                            |         说明          |
-| :---------: | :-----------: | :----------------------------------------------------------: | :-------------------: |
-|    type     |    String     |                            square                            | 选项样式，可选 circle |
-|    color    |    String     |                              -                               |       默认颜色        |
+|   属性名    |     类型      |                             默认值                              |         说明          |
+| :---------: | :-----------: | :-------------------------------------------------------------: | :-------------------: |
+|    type     |    String     |                             square                              | 选项样式，可选 circle |
+|    color    |    String     |                                -                                |       默认颜色        |
 |   options   |     Array     | ['#333', '#f44236', '#3f51b5', '#2195f3', '#ffeb3b', '#ff9900'] |        备选色         |
-|    size     | Number/String |                              44                              | 圆/方形大小，单位 rpx |
-|    tick     |    Boolean    |                             true                             |     是否选中打勾      |
-|  tickSize   | Number/String |                              24                              |        勾大小         |
-| borderColor |    String     |                             #fff                             |       边框颜色        |
-|   border    |    Boolean    |                            false                             |      是否有边框       |
-|    space    | Number/String |                              16                              |       选项间隙        |
+|    size     | Number/String |                               44                                | 圆/方形大小，单位 rpx |
+|    tick     |    Boolean    |                              true                               |     是否选中打勾      |
+|  tickSize   | Number/String |                               24                                |        勾大小         |
+| borderColor |    String     |                              #fff                               |       边框颜色        |
+|   border    |    Boolean    |                              false                              |      是否有边框       |
+|    space    | Number/String |                               16                                |       选项间隙        |
 
 ### 事件（Events）
 
