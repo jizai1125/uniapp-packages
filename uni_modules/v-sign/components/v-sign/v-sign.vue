@@ -6,7 +6,13 @@
 			@touchstart="onTouchStart"
 			@touchmove="onTouchMove"
 			@touchend="onTouchEnd"
-			:style="[{ width: formatSize(width || winWidth, 'px'), height: formatSize(height) }, customStyle]"
+			:style="[
+				{
+					width: width && formatSize(width),
+					height: height && formatSize(height)
+				},
+				customStyle
+			]"
 		></canvas>
 		<slot />
 	</view>
@@ -44,8 +50,7 @@ export default {
 		},
 		// canvas 高度
 		height: {
-			type: [String, Number],
-			default: 300
+			type: [String, Number]
 		},
 		// 画笔大小，权重小于 v-sign-pen 组件设置的画笔大小 penLineWidth
 		lineWidth: {
@@ -83,23 +88,24 @@ export default {
 			penLineColor: null // v-sign-color 组件设置的颜色
 		}
 	},
-	mounted() {
+	created() {
 		// 获取窗口宽高
-		const {windowWidth, windowHeight} = uni.getSystemInfoSync()
+		const { windowWidth, windowHeight } = uni.getSystemInfoSync()
 		this.winWidth = windowWidth
 		this.winHeight = windowHeight
+	},
+	mounted() {
 		this.canvasCtx = uni.createCanvasContext(this.cid, this)
 		// h5 需延迟绘制，否则绘制失败
 		// #ifdef H5
 		setTimeout(() => {
-		// #endif
+			// #endif
 			this.setBackgroundColor(this.bgColor)
-		// #ifdef H5
+			// #ifdef H5
 		}, 10)
 		// #endif
 		// 初始化完成，触发 init 事件
 		this.$emit('init', this.provideSignInterface())
-	
 	},
 	methods: {
 		onTouchStart(e) {
@@ -180,7 +186,10 @@ export default {
 			if (coordinatesLen < 2) {
 				// only start, no move event
 				startPos = coordinates[coordinatesLen - 1]
-				endPos = { x: startPos.x + 1, y: startPos.y }
+				endPos = {
+					x: startPos.x + 1,
+					y: startPos.y
+				}
 			} else {
 				startPos = coordinates[coordinatesLen - 2]
 				endPos = coordinates[coordinatesLen - 1]
@@ -212,7 +221,9 @@ export default {
 					document.body.appendChild(a)
 					a.click()
 					a.remove()
-					resolve({ errMsg: 'saveImageH5:ok' })
+					resolve({
+						errMsg: 'saveImageH5:ok'
+					})
 				} catch (e) {
 					console.error(e)
 					reject(e)
@@ -275,7 +286,7 @@ export default {
 				setLineWidth: this.setLineWidth,
 				setLineColor: this.setLineColor,
 				setBackgroundColor: this.setBackgroundColor,
-				getLineData: () => this.lineData,
+				getLineData: () => this.lineData
 			}
 		},
 		/**
@@ -292,7 +303,10 @@ export default {
 			const { x, y } = B
 			let x1 = (x - (1 - t) * (1 - t) * x0 - t * t * x2) / (2 * t * (1 - t))
 			let y1 = (y - (1 - t) * (1 - t) * y0 - t * t * y2) / (2 * t * (1 - t))
-			return { x: x1, y: y1 }
+			return {
+				x: x1,
+				y: y1
+			}
 		}
 	}
 }

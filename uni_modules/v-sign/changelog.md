@@ -1,3 +1,5 @@
+## 0.5.1（2022-05-27）
+- 取消属性 width, height 默认值
 ## 0.5.0（2022-05-27）
 - 新增 v-sgin 组件获取坐标信息数组方法 `getLineData`
 - 新增 v-sign 组件事件触发 @clear, @revoke, @end

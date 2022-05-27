@@ -10,11 +10,20 @@
 
 ```html
 <template>
-	<v-sign @init="onSignInit"></v-sign>
+	<v-sign :width="winWidth + 'px'" @init="onSignInit"></v-sign>
 	<button @click="clear">清空<button>
 </template>
 <script>
     export default {
+      	data() {
+          return {
+          	winWidth: 0  
+          }
+        },
+        created() {
+        const { windowWidth } = uni.getSystemInfoSync()
+        this.winWidth = windowWidth
+      },
         methods: {
             onSignInit(signCtx) {
                 this.signCtx = signCtx
@@ -32,15 +41,15 @@
 
 ### 属性 (Props)
 
-|   属性名    |     类型      |    默认值     |             说明             |
-| :---------: | :-----------: | :-----------: | :--------------------------: |
-|     cid     |    String     | v-sign-时间戳 |          canvas id           |
-|    width    | String/Number |     100%      | canvas 宽度，Number 单位 rpx |
-|   height    | String/Number |    300rpx     | canvas 高度，Number 单位 rpx |
-| customStyle |    Object     |       -       |      canvas 自定义样式       |
-|  lineWidth  |    Number     |       4       |        线宽，单位 px         |
-|  lineColor  |    String     |     #333      |            线颜色            |
-|   bgColor   |    String     |     #fff      |         画布背景颜色         |
+|   属性名		|     类型		|    默认值		|             说明				|
+| :---------:	| :-----------:	| :-----------:	| :--------------------------:	|
+|     cid		|    String		| v-sign-时间戳	|          canvas id			|
+|    width		| String/Number	|     -		| canvas 宽度，Number 单位 rpx	|
+|   height		| String/Number	|    -		| canvas 高度，Number 单位 rpx	|
+| customStyle	|    Object		|       -		|      canvas 自定义样式		|
+|  lineWidth	|    Number		|       4		|        线宽，单位 px			|
+|  lineColor	|    String		|     #333		|            线颜色				|
+|   bgColor		|    String		|     #fff		|         画布背景颜色			|
 
 ### 事件（Events）
 

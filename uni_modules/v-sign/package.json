@@ -1,7 +1,7 @@
 {
   "id": "v-sign",
   "displayName": "canvas 手写 签名 签字 画板组件",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "基于 canvas 实现；1. 支持线条自定义样式；2. 支持撤回、清空、导出图片等功能；3. 内置按钮、画笔等子组件。",
   "keywords": [
     "canvas",
