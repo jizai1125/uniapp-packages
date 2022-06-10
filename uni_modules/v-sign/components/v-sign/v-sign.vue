@@ -6,6 +6,7 @@
 			@touchstart="onTouchStart"
 			@touchmove="onTouchMove"
 			@touchend="onTouchEnd"
+			disable-scroll
 			:style="[
 				{
 					width: width && formatSize(width),

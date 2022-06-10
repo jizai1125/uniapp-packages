@@ -93,8 +93,8 @@ interface SignContext {
 ```html
 <template>
 	<v-sign @init="onSignInit"></v-sign>
-		<button @click="clear">清空<button>
-		<button @click="revoke">撤回<button>
+	<button @click="clear">清空<button>
+	<button @click="revoke">撤回<button>
     <button @click="saveTempFilePath">保存临时图片路径<button>
     <button @click="saveImage">保存图片<button>
 </template>
@@ -126,6 +126,8 @@ interface SignContext {
 ```
 
 # 子组件
+
+子组件需要包裹在 `v-sign` 组件内使用！！！
 
 ## 按钮控件（v-sign-action）
 
