@@ -21,7 +21,7 @@
       }
     },
     created() {
-      // 宽度设为可使用窗口宽度
+      // 宽度设为可使用窗口宽度，如果不设宽度，则宽度为 canvas 默认值
       const { windowWidth } = uni.getSystemInfoSync()
       this.winWidth = windowWidth
     },
@@ -69,22 +69,22 @@
 
 ```java
 interface SignContext {
-  // canvas 实例
-	ctx: object;
-	// 清空画布
-	clear(): void;
-	// 撤回
-	revoke(): void;
-  // 保存 png 图片，文件名 filename 配置仅支持 h5
-  saveImage(filename: string): Promise<object>;
-  // 返回图片临时文件路径，config 参数同 uni.canvasToTempFilePath方法，内部只是做了 Promise 化处理而已
-  canvasToTempFilePath(config: object): Promise<object>;
-  // 设置画布背景色
-  setBackgroundColor(color: string): void;
-  setLineWidth(value: number): void;
-  setLineColor(value: string): void;
-  // 获取坐标信息数组
-  getLineData(): Array<object>;
+    // canvas 实例
+    ctx: object;
+    // 清空画布
+    clear(): void;
+    // 撤回
+    revoke(): void;
+    // 保存 png 图片，文件名 filename 配置仅支持 h5
+    saveImage(filename: string): Promise<object>;
+    // 返回图片临时文件路径，config 参数同 uni.canvasToTempFilePath方法，内部只是做了 Promise 化处理而已
+    canvasToTempFilePath(config: object): Promise<object>;
+    // 设置画布背景色
+    setBackgroundColor(color: string): void;
+    setLineWidth(value: number): void;
+    setLineColor(value: string): void;
+    // 获取坐标信息数组
+    getLineData(): Array<object>;
 }
 ```
 
@@ -113,8 +113,9 @@ interface SignContext {
           this.signCtx.revoke()
       },
       // 保存为临时图片路径，h5返回 base64
-      saveTempFilePath() {
-          this.signCtx.canvasToTempFilePath()
+      async saveTempFilePath() {
+          const res = await this.signCtx.canvasToTempFilePath()
+          console.log(res)
       },
       // 保存 png 图片
       saveImage() {
