@@ -65,7 +65,7 @@ export default {
 
 <style lang="scss" scoped>
 .g-container {
-  width: 100vh;
+  width: 100vw;
   height: 100vh;
 
   .control-area {

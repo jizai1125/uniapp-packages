@@ -3,19 +3,28 @@
 		{
 			"path": "pages/home/index",
 			"style": {
-				"navigationBarTitleText": "签名组件"
+				"navigationBarTitleText": "签名组件",
+				"navigationBarBackgroundColor": "#339DFF",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": false
 			}
 		},
 		{
 			"path": "pages/v-sign-simple/index",
 			"style": {
-				"navigationBarTitleText": "签名组件-简单示例"
+				"navigationBarTitleText": "签名组件-简单示例",
+				"navigationBarBackgroundColor": "#339DFF",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": false
 			}
 		},
 		{
 			"path": "pages/v-sign-sub-comp/index",
 			"style": {
-				"navigationBarTitleText": "签名组件-子组件"
+				"navigationBarTitleText": "签名组件-子组件",
+				"navigationBarBackgroundColor": "#339DFF",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": false
 			}
 		}
 	],
